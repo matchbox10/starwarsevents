@@ -9,12 +9,15 @@ class DefaultController extends Controller
 {
     public function indexAction($name, $count)
     {
-        $data = array(  
-            'count' => $count,
-            'firstName' => $name,
-            'ackbar' => 'It\'s a Trap!'
+        //$em = $this->container->get('doctrine')->getManager();
+        $em = $this->getDoctrine()->getManager();
 
-        );
-        return $this->render('EventBundle:Default:index.html.twig', array('name' => $name));
+        $repo = $em->getRepository('EventBundle:Event');
+
+        $event = $repo->findOneBy(array(
+            'name' => 'Darth\'s Surprise Birthday party'
+        ));
+
+        return $this->render('EventBundle:Default:index.html.twig', array('name' => $name, 'count' => $count, 'event' => $event));
     }
 }

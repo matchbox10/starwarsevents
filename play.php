@@ -20,10 +20,14 @@ $container->set('request', $request);
 
 //Setup is done
 
+use Yoda\EventBundle\Entity\Event;
 
-$templating = $container->get('templating');
+$event = new Event();
+$event->setName('Darth\'s Surprise Birthday party');
+$event->setLocation('Dethstar');
+$event->setTime(new \DateTime('tomorrow noon'));
+$event->setDetails('Ha Dart Hates Surprises');
 
-echo $templating->render(
-    'EventBundle:Default:index.html.twig', 
-    array('name' => 'Vader', 'count' => 3)
-);
+$em = $container->get('doctrine')->getManager();
+$em->persist($event);
+$em->flush();
