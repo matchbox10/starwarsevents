@@ -1,1 +1,11 @@
-Hello <strong>{{ name }}!</strong>
+{# Comments #}
+{% extends '::base.html.twig'%}
+
+{% block title 'Hello Marky'%}
+
+{% block body %}
+    {% for i in 1..10 %}
+    Hello <strong>{{ name|capitalize }}! #{{ i }}</strong><br>
+    {% endfor %}
+
+{% endblock %}

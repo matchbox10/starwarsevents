@@ -15,11 +15,6 @@ class DefaultController extends Controller
             'ackbar' => 'It\'s a Trap!'
 
         );
-        $json = json_encode($data);
         return $this->render('EventBundle:Default:index.html.twig', array('name' => $name));
-        $response = new Response($json);
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
     }
 }
